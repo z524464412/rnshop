@@ -1,0 +1,32 @@
+{
+	"name": "rnshop",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest"
+	},
+	"dependencies": {
+		"lodash": "^4.17.5",
+	    "mockjs": "^1.0.1-beta3",
+	    "query-string": "^5.0.1",
+	    "react": "16.0.0-alpha.6",
+	    "react-addons-update": "^15.6.2",
+	    "react-native": "0.44.0",
+	    "react-native-image-picker": "^0.24.1",
+	    "react-native-scrollable-tab-view": "^0.6.5",
+	    "react-native-sk-countdown": "^1.0.1",
+	    "react-native-vector-icons": "^4.3.0",
+	    "react-native-video": "^2.0.0",
+	    "react-navigation": "^1.0.0-beta.9"
+	},
+	"devDependencies": {
+		"babel-jest": "22.1.0",
+		"babel-preset-react-native": "4.0.0",
+		"jest": "22.1.4",
+		"react-test-renderer": "16.0.0-alpha.6"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
+}
