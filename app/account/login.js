@@ -10,17 +10,6 @@ import {
   Button,
   AlertIOS
 } from 'react-native';
-var ImagePicker = require('react-native-image-picker');
-var options = {
-  title: 'Select Avatar',
-  customButtons: [
-    {name: 'fb', title: 'Choose Photo from Facebook'},
-  ],
-  storageOptions: {
-    skipBackup: true,
-    path: 'images'
-  }
-};
 // create a component
 class Login extends PureComponent {
        //设置导航栏 
@@ -38,9 +27,6 @@ class Login extends PureComponent {
        phoneNumber:'',
        verifyCode:'',
        countingDone:false,
-
-       avatarSource:''
-
     };
   }
   _submit(){
@@ -112,38 +98,10 @@ class Login extends PureComponent {
       countingDone:true
     })
   }
-  showPickerImage(){
-    ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      }
-      else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      }
-      else {
-        let source = { uri: response.uri };
-
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-        this.setState({
-          avatarSource: source
-        });
-      }
-    });
-  }
   render(){
     return (
         <View style={styles.container}>
             <View style={styles.signupBox}>
-                <View >
-                    <Text onPress={this.showPickerImage.bind(this)}>123123</Text>
-                </View>
                 <Text style={styles.title}>快速登录</Text>
                 <TextInput
                   style={styles.inputField}

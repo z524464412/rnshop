@@ -75,7 +75,6 @@ import {
         page:page
       })
       .then(function(data){
-        console.log(data)
         if(data && data.success){
           var comments = data.data;
           if(comments && comments.length >0){
@@ -152,7 +151,6 @@ import {
       }
     }
     _renderItem = (info) => {
-      console.log(info)
       return (
         <View key={info.item._id} style={styles.replyBox}>
             <Image style={styles.replyAvatar} 
@@ -246,9 +244,6 @@ import {
                 <Text style={styles.title}>{info.title}</Text>
               </View>
             </View>
-            {
-              console.log(this.state)
-            }
             <View style={{flex:1}}>
               <FlatList
                 data={this.state.comments}

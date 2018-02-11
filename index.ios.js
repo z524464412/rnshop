@@ -54,7 +54,7 @@ export default class rnshop extends PureComponent {
     })
   }
   render() {
-    if(this.state.logined){
+    if(!this.state.logined){
       return <Login afterLogin={this._afterLogin.bind(this)}/>
     }
     return (

@@ -31,11 +31,11 @@ class Item extends PureComponent{
         up  : false
       }
   }
-  _up(){    var that = this;
+  _up(){    
+    var that = this;
     var up = !this.state.up;
     var row = this.state.row;
     var url = config.api.base + config.api.up;
-    console.log(row)
     var body = {
       id:row._id,
       up:up ? 'yes' :'no',

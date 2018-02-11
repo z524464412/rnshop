@@ -121,7 +121,6 @@ class List extends PureComponent {
     this._fetchData(page)
   } 
   onCellSelected(row: Object){
-    console.log(row)
     this.props.navigation.navigate('Details', { data: row })
   }
   _renderItem = (row: Object) => {
