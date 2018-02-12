@@ -233,7 +233,7 @@ var styles = StyleSheet.create({
     borderColor: '#ee735c',
     borderWidth: 1,
     borderRadius:4,
-  },
+  }
 
 })
 module.exports = Login ;

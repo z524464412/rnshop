@@ -23,7 +23,8 @@ import {
   Image,
   AlertIOS,
   TextInput,
-  Modal
+  Modal,
+  Button
 
 } from 'react-native';
 var photoOptions = {
@@ -69,7 +70,7 @@ class Account extends PureComponent {
       headerRight:(
             <Text 
               style={styles.toolbarExtra} 
-              onPress={this._edit}
+              onPress={()=>navigation.state.params._edit()}
             >
               编辑
             </Text>
@@ -77,7 +78,9 @@ class Account extends PureComponent {
   })
   constructor(props) {
     super(props);
+    console.log(props)
     var user = this.props.user || {};
+    var that = this;
     this.state = {
       user:user,
       avatarSource:'',
@@ -87,8 +90,7 @@ class Account extends PureComponent {
     };
     
   }
-  _edit(){
-    console.log(12312)
+  _edit = ()=>{
     this.setState({
       modelVisible:true
     })
@@ -98,13 +100,10 @@ class Account extends PureComponent {
       modelVisible:false
     })
   }
-  navigatePress = ()=>{
-    console.log(this.props.navigation);
-  }
   componentDidMount(){
     var _this = this;
     this.props.navigation.setParams({
-      navigatePress:this.navigatePress
+      _edit:this._edit
     })
     AsyncStorage.getItem('user')
     .then((data)=>{
@@ -236,12 +235,29 @@ class Account extends PureComponent {
           _this.setState({
             user
           },function(){
+            _this._closeModal();
             AsyncStorage.setItem('user',JSON.stringify(user))
           })
         }
       })
     }
 
+  }
+  _changeUserState(key,value){
+    var user =this.state.user
+    user[key] = value
+    var aa = Date.now();
+    this.setState({
+        user:user,
+        aa:aa
+    })
+  }
+  _logout(){
+    console.log(this.props)
+    //this.props._logout();
+  }
+  _submit(){
+    this._asyncUser()
   }
   render(){
     var user = this.state.user;
@@ -311,12 +327,83 @@ class Account extends PureComponent {
                   autoCorrect = {false}
                   defaultValue={user.nickname}
                   onChangeText={(text)=>{
-                    this.changeUserState('nickname',text)
+                    this._changeUserState('nickname',text)
                   }}
                 />
               </View>
+
+              <View style={styles.fieldItem}>
+                <Text style={styles.label}>品种</Text>
+                <TextInput
+                  placeholder={'品种'}
+                  style={styles.inputField}
+                  autoCapitalize={'none'}
+                  autoCorrect = {false}
+                  defaultValue={user.breed}
+                  onChangeText={(text)=>{
+                    this._changeUserState('breed',text)
+                  }}
+                />
+              </View>
+
+
+              <View style={styles.fieldItem}>
+                <Text style={styles.label}>年龄</Text>
+                <TextInput
+                  placeholder={'年龄'}
+                  style={styles.inputField}
+                  autoCapitalize={'none'}
+                  autoCorrect = {false}
+                  defaultValue={user.age}
+                  onChangeText={(text)=>{
+                    this._changeUserState('age',text)
+                  }}
+                />
+              </View>
+
+              <View style={styles.fieldItem}>
+                <Text style={styles.label}>性别</Text>
+                {
+                    console.log(this.state.user.gender)
+                  }
+                <Icon.Button
+                  onPress={()=>{
+                    this._changeUserState('gender','male')
+                  }}
+                  style={[
+                      styles.gender,
+                      user.gender == 'male'  && styles.genderChecked
+                    ]}
+                  name='ios-paw'>男
+                </Icon.Button>
+                <Icon.Button
+                  onPress={()=>{
+                    this._changeUserState('gender','female')
+                  }}
+                  style={[
+                      styles.gender,
+                      user.gender == 'female' && styles.genderChecked
+                    ]}
+                  name='ios-paw-outline'>女
+                  </Icon.Button>
+              </View>  
+              <View style={styles.btn}>
+                <Button
+                  title='保存'
+                  color='#ee735c'
+                  onPress={this._submit.bind(this)}>
+                </Button>
+              </View>          
           </View>
         </Modal>
+
+        <View style={styles.btn}>
+          <Button
+            title='退出登录'
+            color='#ee735c'
+            onPress={this._logout.bind(this)}>
+          </Button>
+        </View> 
       </View>
     )
   }
@@ -392,14 +479,37 @@ var styles = StyleSheet.create({
   color:'#ccc',
   marginRight: 10
  },
+ closeIcon:{
+  position:'absolute',
+  width:40,
+  height:40,
+  fontSize:32,
+  right:20,
+  top:30,
+  color:'#ee735c'
+ },
  inputField:{
   height:50,
   flex:1,
   color:'#666',
   fontSize:14
 
- }
-
-
+ },
+ gender:{
+  backgroundColor:'#ccc'
+ },
+genderChecked:{
+  backgroundColor:'#ee735c'
+},
+  btn:{
+    marginTop:30,
+    padding:10,
+    marginLeft: 10,
+    marginRight:10,
+    backgroundColor: 'transparent',
+    borderColor: '#ee735c',
+    borderWidth: 1,
+    borderRadius:4,
+},
 })
 module.exports = Account ;

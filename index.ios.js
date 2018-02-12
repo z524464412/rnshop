@@ -53,12 +53,19 @@ export default class rnshop extends PureComponent {
       console.log(err)
     })
   }
+  logout(){
+    AsyncStorage.removeItem('user')
+    this.setState({
+      logined:false,
+      user:null
+    })
+  }
   render() {
     if(!this.state.logined){
       return <Login afterLogin={this._afterLogin.bind(this)}/>
     }
     return (
-        <RootScene />
+        <RootScene user={this.state.user} logout={this.logout.bind(this)} />
     );
   }
 }
