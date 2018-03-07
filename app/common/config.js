@@ -3,11 +3,14 @@ module.exports ={
   header:{
     method: 'POST',
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
     }
   },
   api:{
-    base:'http://rapapi.org/mockjs/24254/',
+    // base:'http://rapapi.org/mockjs/24254/',
+
+    base:'http://localhost:8888/',
 
   	creations:'api/creations',
     up:'api/up',

@@ -17,11 +17,16 @@ request.get = function(url,params){
       });
 }
 request.post = ( url,body ) => {
+	console.log(body)
 	var options =_.extend(config.header,{
 		body:JSON.stringify(body)
 	})
+	console.log(options)
 	return fetch(url,options)
 		.then((response) => response.json())
 		.then((response) => Mock.mock(response))
+		.catch((error) => {
+        console.error(error);
+      });
 }
 module.exports = request

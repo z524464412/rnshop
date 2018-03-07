@@ -19,6 +19,7 @@ class Login extends PureComponent {
   })
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
        props :props,
        data:[],
@@ -47,6 +48,7 @@ class Login extends PureComponent {
 
     request.post(verifyURL,body)
       .then((data)=>{
+        console.log(data)
         if(data && data.success){
           _this.props.afterLogin(data.data)
         }

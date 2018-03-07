@@ -14,8 +14,11 @@ import Details from './creation/detail'
 // create a component
 class RootScene extends PureComponent {
     constructor(props) {
+        console.log(props)
         super(props)
-
+        this.state = {
+            props :props
+        }
         StatusBar.setBarStyle('dark-content')
     }
     render() {
@@ -62,6 +65,7 @@ const Tab = TabNavigator(
                         focused ={ focused }
                         normalImage={require('./images/icon/ios7-more-outline.png')}
                         selectedImage={require('./images/icon/ios7-more.png')}
+                        user={123123}
                     />
                 )
             }),

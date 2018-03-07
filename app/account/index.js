@@ -44,16 +44,16 @@ var photoOptions = {
 }
 var width = Dimensions.get('window').width;
 
-var CLOUDINARY = {
-  'cloud_name': 'dowj9zkna',  
-  'api_key': '843861538595344',  
-  'api_secret': 'yGeRQ29Ir6hJXooB5ghvH710SwY',  
-  'base':'http://res.cloudinary.com/dowj9zkna',
-  'image':'https://api.cloudinary.com/v1_1/dowj9zkna/image/upload',
-  'video':'https://api.cloudinary.com/v1_1/dowj9zkna/video/upload',
-  'audio':'https://api.cloudinary.com/v1_1/dowj9zkna/raw/upload'
+// var CLOUDINARY = {
+//   'cloud_name': 'dowj9zkna',  
+//   'api_key': '843861538595344',  
+//   'api_secret': 'yGeRQ29Ir6hJXooB5ghvH710SwY',  
+//   'base':'http://res.cloudinary.com/dowj9zkna',
+//   'image':'https://api.cloudinary.com/v1_1/dowj9zkna/image/upload',
+//   'video':'https://api.cloudinary.com/v1_1/dowj9zkna/video/upload',
+//   'audio':'https://api.cloudinary.com/v1_1/dowj9zkna/raw/upload'
 
-}
+// }
 function avatar(id,type){
   if(id.indexOf('http') > -1){
     return id
@@ -141,10 +141,8 @@ class Account extends PureComponent {
       .then((data)=>{
         if(data && data.success){
           // data.data
-          var signature = 'folder=' +folder + '&tags='+tags + 
-          '&timestamp=' + timestamp + CLOUDINARY.api_secret
-
-          signature = sha1(signature)
+          console.log(data)
+          var signature = data.data
 
           var body =  new FormData()
           body.append('folder',folder)
@@ -252,9 +250,12 @@ class Account extends PureComponent {
         aa:aa
     })
   }
-  _logout(){
-    console.log(this.props)
-    //this.props._logout();
+ _logout(){
+    AsyncStorage.removeItem('user')
+    // this.setState({
+    //   logined:false,
+    //   user:null
+    // })
   }
   _submit(){
     this._asyncUser()
